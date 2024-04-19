@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 public class DecimalReverseOrder {
@@ -25,6 +27,58 @@ public class DecimalReverseOrder {
 		
 		String joinResponse = joinStrings();
 		System.out.println(joinResponse);
+		
+		List<Integer> multiResult = multiplyInteger();
+		System.out.println(multiResult);
+		
+		List<Integer> listOfIntegers = Arrays.asList(45, 12, 56, 15, 24, 75, 31, 89);
+		Optional<Integer> firstWay = findMaxFirstWay(listOfIntegers);
+		System.out.println("1. MAX NUMBER ------------" + firstWay.get());
+		
+		OptionalInt secondWay = findMaxSecondWay(listOfIntegers);
+		System.out.println("2. MAX NUMBER ------------" + secondWay.getAsInt());
+		
+		Optional<Integer> thirdWay = findMaxThirdWay(listOfIntegers);
+		System.out.println("3. MAX NUMBER ------------" + thirdWay.get());
+		
+		Optional<Integer> minFindWay = findMinThirdWay(listOfIntegers);
+		System.out.println("1. MIN NUMBER ------------" + minFindWay.get());
+		
+		
+		
+	}
+
+	private static Optional<Integer> findMaxThirdWay(List<Integer> listOfIntegers) {
+		Optional<Integer> thirdWay=listOfIntegers.stream()
+		.collect(Collectors.maxBy(Comparator.comparing(t->t)));
+		return thirdWay;
+	}
+	
+	private static Optional<Integer> findMinThirdWay(List<Integer> listOfIntegers) {
+		Optional<Integer> thirdWay=listOfIntegers.stream()
+		.collect(Collectors.minBy(Comparator.comparing(t->t)));
+		return thirdWay;
+	}
+
+	private static OptionalInt findMaxSecondWay(List<Integer> listOfIntegers) {
+		OptionalInt secondWay =listOfIntegers.stream()
+		.mapToInt(Integer::intValue)
+		.max();
+		return secondWay;
+	}
+
+	private static Optional<Integer> findMaxFirstWay(List<Integer> listOfIntegers) {
+		Optional<Integer> firstWay =listOfIntegers.stream()
+		.reduce(Integer::max);
+		return firstWay;
+	}
+
+	private static List<Integer> multiplyInteger() {
+		List<Integer> listOfIntegers = Arrays.asList(45, 12, 56, 15, 24, 75, 31, 89);
+		List<Integer> multiResult = listOfIntegers.stream()
+				.filter(t->t%5==0)
+		.collect(Collectors.toList());
+		return multiResult;
 	}
 
 	/**
