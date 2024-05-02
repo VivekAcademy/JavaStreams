@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,6 +26,11 @@ public class CaseOne {
 				.collect(Collectors.summingInt(t->t));
 		
 		System.out.println("Sum of Integer is " + valuesOne);
+		
+		List<Integer> reverseResponse=listOfInteger.stream()
+		.sorted(Comparator.reverseOrder())
+		.collect(Collectors.toList());
+		System.out.println(reverseResponse);
 
 	}
 
