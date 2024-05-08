@@ -47,56 +47,106 @@ public class DecimalReverseOrder {
 
 		findthreeMaximum();
 		findthreeMinimum();
-		
-		
+
 		int[] c = concatArrays();
-        System.out.println(Arrays.toString(c));
-        
-        int[] output = concatArraysWithOutDuplicates();
-        System.out.println(Arrays.toString(output));
-        
-        int[] outputReversedOrder = concatArraysReversedOrder();
-        System.out.println(Arrays.toString(outputReversedOrder));
-        
+		System.out.println(Arrays.toString(c));
+
+		int[] output = concatArraysWithOutDuplicates();
+		System.out.println(Arrays.toString(output));
+
+		int[] outputReversedOrder = concatArraysReversedOrder();
+		System.out.println(Arrays.toString(outputReversedOrder));
+
+		printSecondLargest();
+
+		String reverseString = reverseString();
+		System.out.println(reverseString);
+
+		sortedStringBasedOnLength();
+
+		operationSumAndAvg();
+		findCommonElements();
+
+		String responseTwo = implReversedString();
+		System.out.println(responseTwo);
+
+	}
+
+	private static String implReversedString() {
+		String str = "Java Concept Of The Day";
+		String responseTwo = Arrays.stream(str.split(" ")).map(word -> new StringBuffer(word).reverse().toString())
+				.collect(Collectors.joining(" "));
+		return responseTwo;
+	}
+
+	private static void findCommonElements() {
+		List<Integer> list1 = Arrays.asList(71, 21, 34, 89, 56, 28);
+
+		List<Integer> list2 = Arrays.asList(12, 56, 17, 21, 94, 34);
+
+		list1.stream().filter(list2::contains).forEach(System.out::println);
+	}
+
+	private static void operationSumAndAvg() {
+		int[] a = new int[] { 45, 12, 56, 15, 24, 75, 31, 89 };
+
+		int resultsSum = Arrays.stream(a).sum();
+
+		double average = Arrays.stream(a).average().getAsDouble();
+		System.out.println("SUM " + resultsSum);
+		System.out.println("AVERAGE " + average);
+	}
+
+	private static void sortedStringBasedOnLength() {
+		List<String> listOfStrings = Arrays.asList("Java", "Python", "C#", "HTML", "Kotlin", "C++", "COBOL", "C");
+		listOfStrings.stream().sorted(Comparator.comparing(String::length)).forEach(System.out::println);
+	}
+
+	private static String reverseString() {
+		StringBuilder name = new StringBuilder("vivek");
+		String reverseString = name.reverse().toString();
+		return reverseString;
+	}
+
+	private static void printSecondLargest() {
+		List<Integer> listOfInputValues = Arrays.asList(45, 12, 56, 15, 24, 75, 31, 89);
+		listOfInputValues.stream().sorted(Comparator.reverseOrder()).skip(1).limit(1).forEach(System.out::println);
 	}
 
 	private static int[] concatArrays() {
-		int[] a = new int[] {4, 2, 7, 1};
-        
-        int[] b = new int[] {8, 3, 9, 5};
-        
-        int[] c = IntStream.concat(Arrays.stream(a), Arrays.stream(b)).sorted().toArray();
+		int[] a = new int[] { 4, 2, 7, 1 };
+
+		int[] b = new int[] { 8, 3, 9, 5 };
+
+		int[] c = IntStream.concat(Arrays.stream(a), Arrays.stream(b)).sorted().toArray();
 		return c;
 	}
-	
+
 	private static int[] concatArraysReversedOrder() {
-		int[] a = new int[] {4, 2, 7, 1};
-        
-        int[] b = new int[] {8, 3, 9, 5};
-        
-        int[] c = IntStream.concat(Arrays.stream(a), Arrays.stream(b)).boxed().sorted(Comparator.reverseOrder())
-        		.mapToInt(Integer::intValue)
-        		.toArray();
+		int[] a = new int[] { 4, 2, 7, 1 };
+
+		int[] b = new int[] { 8, 3, 9, 5 };
+
+		int[] c = IntStream.concat(Arrays.stream(a), Arrays.stream(b)).boxed().sorted(Comparator.reverseOrder())
+				.mapToInt(Integer::intValue).toArray();
 		return c;
 	}
-	
+
 	private static int[] concatArraysWithOutDuplicates() {
-		int[] a = new int[] {4, 2, 5, 1};
-        
-        int[] b = new int[] {8, 1, 9, 5};
-        
-        int[] c = IntStream.concat(Arrays.stream(a), Arrays.stream(b)).distinct().sorted().toArray();
+		int[] a = new int[] { 4, 2, 5, 1 };
+
+		int[] b = new int[] { 8, 1, 9, 5 };
+
+		int[] c = IntStream.concat(Arrays.stream(a), Arrays.stream(b)).distinct().sorted().toArray();
 		return c;
 	}
-	
-	
 
 	private static void findthreeMaximum() {
 		List<Integer> listOfIntegersValues = Arrays.asList(45, 12, 56, 15, 24, 75, 31, 89);
 		System.out.println("Three Maximum Numbers are ");
 		listOfIntegersValues.stream().sorted(Comparator.reverseOrder()).limit(3).forEach(System.out::println);
 	}
-	
+
 	private static void findthreeMinimum() {
 		List<Integer> listOfIntegersValues = Arrays.asList(45, 12, 56, 15, 24, 75, 31, 89);
 		System.out.println("Three Minimum Numbers are ");

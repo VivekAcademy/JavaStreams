@@ -36,7 +36,16 @@ public class MaxMinAvgSumWithWrapper {
 
 		System.out.println("Total Number of Notebooks Without Reduce " + findTotalNotebooksWithOutReduce());
 		System.out.println("Averaging Notebooks are " + findAvgNotebooks());
+		
+		double averageNotebooks = averageNotebooks();
+		System.out.println(averageNotebooks);
 
+	}
+
+	private static double averageNotebooks() {
+		double averageNoteBooks = StudentDataBase.getAllStudents().stream()
+		.collect(Collectors.averagingInt(Student::getNotebooks));
+		return averageNoteBooks;
 	}
 
 	/**
