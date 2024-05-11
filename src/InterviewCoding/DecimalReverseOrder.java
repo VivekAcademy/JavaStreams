@@ -70,6 +70,61 @@ public class DecimalReverseOrder {
 		String responseTwo = implReversedString();
 		System.out.println(responseTwo);
 
+		int[] reversedArray = reversedArray();
+		System.out.println("Reversed Array Are :- " + Arrays.toString(reversedArray));
+
+		int sumOfDigits = sumOfDigits();
+		System.out.println("Sum of digits is " + sumOfDigits);
+		boolean valuesForAnagrams = anagramsStrings();
+		System.out.println("Strings are Anagrams :- " + valuesForAnagrams);
+
+		Map<String, Long> dem = findCharacterCountingSecondWay();
+		System.out.println("================" + dem);
+
+		findIfPalindromeStringsOrNot();
+
+	}
+
+	private static void findIfPalindromeStringsOrNot() {
+		String str = "ROTATOR";
+		boolean results = IntStream.rangeClosed(0, str.length() / 2)
+				.noneMatch(i -> str.charAt(i) != str.charAt(str.length() - 1 - i));
+		if (results) {
+			System.out.println(str + " String is palindrome");
+		} else {
+
+			System.out.println("String is not Palindrome");
+		}
+	}
+
+	private static Map<String, Long> findCharacterCountingSecondWay() {
+		String str = "Java Concept Of The Day";
+		Map<String, Long> dem = Arrays.stream(str.split(""))
+				.collect(Collectors.groupingBy(t -> t, Collectors.counting()));
+		return dem;
+	}
+
+	private static int sumOfDigits() {
+		int i = 15623;
+		int sumOfDigits = Arrays.stream(String.valueOf(i).split("")).map(Integer::parseInt)
+				.collect(Collectors.summingInt(t -> t));
+		return sumOfDigits;
+	}
+
+	private static boolean anagramsStrings() {
+		String s1 = "RaceCar";
+		String s2 = "CarRace";
+
+		String s1Anagrams = Arrays.stream(s1.split("")).map(String::toUpperCase).sorted().collect(Collectors.joining());
+		String s2Anagrams = Arrays.stream(s2.split("")).map(String::toUpperCase).sorted().collect(Collectors.joining());
+		return s1Anagrams.equalsIgnoreCase(s2Anagrams);
+	}
+
+	private static int[] reversedArray() {
+		int[] array = new int[] { 5, 1, 7, 3, 9, 6 };
+
+		int[] reversedArray = IntStream.rangeClosed(1, array.length).map(t -> array[array.length - t]).toArray();
+		return reversedArray;
 	}
 
 	private static String implReversedString() {
