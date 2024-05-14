@@ -1,5 +1,7 @@
 package InterviewCoding;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -12,6 +14,7 @@ import java.util.OptionalInt;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class DecimalReverseOrder {
 
@@ -110,6 +113,35 @@ public class DecimalReverseOrder {
 		String responseLastElement = findLastElement();
 		System.out.println(responseLastElement);
 
+		List<Integer> fabboniciNumber = findFibonacciSeries();
+		System.out.println("Fabonicci Number are " + fabboniciNumber);
+
+		List<Integer> oddNumber = findFirstTenOddNumbers();
+		System.out.println("First Ten Odd Numbers Are :- " + oddNumber);
+		
+		long MyAgeInYear = myAgeInYears();
+		System.out.println("My AGE IS " + MyAgeInYear);
+
+	}
+
+	private static long myAgeInYears() {
+		LocalDate birthDay = LocalDate.of(1991, 12, 20);
+		LocalDate currentDate = LocalDate.now();
+		System.out.println("Current Date is " + currentDate);
+		long MyAgeInYear = ChronoUnit.YEARS.between(birthDay, currentDate);
+		return MyAgeInYear;
+	}
+
+	private static List<Integer> findFirstTenOddNumbers() {
+		List<Integer> oddNumber = Stream.iterate(new int[] { 1, 3 }, i -> new int[] { i[1], 2 + i[1] }).limit(10)
+				.map(i -> i[0]).collect(Collectors.toList());
+		return oddNumber;
+	}
+
+	private static List<Integer> findFibonacciSeries() {
+		List<Integer> fabboniciNumber = Stream.iterate(new int[] { 0, 1 }, i -> new int[] { i[1], i[0] + i[1] })
+				.limit(10).map(i -> i[0]).collect(Collectors.toList());
+		return fabboniciNumber;
 	}
 
 	private static String findLastElement() {
