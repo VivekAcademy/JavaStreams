@@ -2,10 +2,14 @@ package InterviewCoding;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -83,6 +87,84 @@ public class DecimalReverseOrder {
 
 		findIfPalindromeStringsOrNot();
 
+		List<String> findStringsStartsWithNum = findStringsStartWithNumeric();
+		System.out.println(findStringsStartsWithNum);
+
+		List<Integer> outputList = findRepetitveElements();
+		System.out.println(outputList);
+
+		Set<String> resultOutput = findCharacterRepetition();
+		System.out.println(resultOutput);
+
+		String results = findFirstRepeatedCharectar();
+		System.out.println("First Repeated Charectar is " + results);
+
+		String resultsOne = findFirstNonRepeatedCharectar();
+		System.out.println("First Non Repeated Charectar is " + resultsOne);
+
+		Optional<Entry<String, Long>> resultsMain = findMostRepetiveString();
+		if (resultsMain.isPresent()) {
+			System.out.println(resultsMain.get());
+		}
+
+		String responseLastElement = findLastElement();
+		System.out.println(responseLastElement);
+
+	}
+
+	private static String findLastElement() {
+		List<String> listOfStrings = Arrays.asList("One", "Two", "Three", "Four", "Five", "Six", "Nine");
+		String responseLastElement = IntStream.rangeClosed(1, listOfStrings.size()).boxed()
+				.map(t -> listOfStrings.get(listOfStrings.size() - t)).findFirst().get();
+		return responseLastElement;
+	}
+
+	private static Optional<Entry<String, Long>> findMostRepetiveString() {
+		List<String> listOfStrings = Arrays.asList("Pen", "Eraser", "Note Book", "Pen", "Pencil", "Pen", "Note Book",
+				"Pencil");
+		Map<String, Long> responseOne = listOfStrings.stream()
+				.collect(Collectors.groupingBy(t -> t, LinkedHashMap::new, Collectors.counting()));
+		Optional<Entry<String, Long>> resultsMain = responseOne.entrySet().stream()
+				.collect(Collectors.maxBy(Comparator.comparing(t -> t.getValue())));
+		return resultsMain;
+	}
+
+	private static String findFirstRepeatedCharectar() {
+		String inputString = "Java Concept Of The Day".replaceAll("\\s+", "").toLowerCase();
+		Set<String> hashSet = new HashSet<>();
+		String results = Arrays.stream(inputString.split("")).filter(i -> !hashSet.add(i)).findFirst().get();
+		return results;
+	}
+
+	private static String findFirstNonRepeatedCharectar() {
+		String inputString = "java Concept Of The Day".replaceAll("\\s+", "").toLowerCase();
+		Map<String, Long> resultsOne = Arrays.stream(inputString.split(""))
+				.collect(Collectors.groupingBy(t -> t, LinkedHashMap::new, Collectors.counting()));
+
+		return resultsOne.entrySet().stream().filter(i -> i.getValue() == 1).map(t -> t.getKey()).findFirst().get();
+
+	}
+
+	private static Set<String> findCharacterRepetition() {
+		String inputString = "Java Concept Of The Day".replaceAll("\\s+", "").toLowerCase();
+		Set<String> hashSet = new HashSet<>();
+		Set<String> resultOutput = Arrays.stream(inputString.split("")).filter(i -> !hashSet.add(i))
+				.collect(Collectors.toSet());
+		return resultOutput;
+	}
+
+	private static List<Integer> findRepetitveElements() {
+		List<Integer> listOfIntegersOne = Arrays.asList(111, 222, 333, 111, 555, 333, 777, 222);
+		Set<Integer> hashSet = new HashSet<>();
+		List<Integer> outputList = listOfIntegersOne.stream().filter(i -> !hashSet.add(i)).collect(Collectors.toList());
+		return outputList;
+	}
+
+	private static List<String> findStringsStartWithNumeric() {
+		List<String> listOfStrings = Arrays.asList("One", "2wo", "3hree", "Four", "5ive", "Six");
+		List<String> findStringsStartsWithNum = listOfStrings.stream().filter(t -> Character.isDigit(t.charAt(0)))
+				.collect(Collectors.toList());
+		return findStringsStartsWithNum;
 	}
 
 	private static void findIfPalindromeStringsOrNot() {
