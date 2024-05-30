@@ -41,4 +41,7 @@ public class StreamSelfPractice {
                 .map(Integer::parseInt)
                 .forEach(System.out::println);
     }
+
+
+
 }
