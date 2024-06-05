@@ -1,6 +1,7 @@
 package InterviewCoding;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -31,6 +32,29 @@ public class StreamReminder {
         printFabbonicci();
         printOddNumbers();
         sumOfFirstAndLastDigit();
+        reverseListOfStrings();
+        flatten();
+
+
+
+    }
+
+    private static void flatten() {
+        List<List<List<String>>>  newList = Arrays.asList(Arrays.asList(Arrays.asList("Vivek")));
+        List<String> output = newList.stream()
+                .flatMap(List::stream)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+        System.out.println(output);
+    }
+
+    private static void reverseListOfStrings() {
+        List<String> listOfString = Arrays.asList("Vivek","Aashvi","Shruti");
+        List<String> listOfStringOutput=IntStream.rangeClosed(0,listOfString.size()-1)
+               .boxed()
+               .map(t->listOfString.get(listOfString.size()-1-t))
+               .collect(Collectors.toList());
+        System.out.println(listOfStringOutput);
     }
 
     private static void sumOfFirstAndLastDigit() {
