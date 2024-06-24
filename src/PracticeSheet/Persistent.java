@@ -27,8 +27,8 @@ public class Persistent {
             for(int j = i+1; j<arrOne.length ;j++){
                 if(arrOne[i]+arrOne[j]==80){
 
-                    System.out.println("Element is " + arrOne[i] + " and" +arrOne[j]  );
-                    System.out.println("Index is " + i + " and"  +j);
+                    System.out.println("Element is " + arrOne[i] + " and " +arrOne[j]  );
+                    System.out.println("Index is " + i + " and "  +j);
 
                 }
 
