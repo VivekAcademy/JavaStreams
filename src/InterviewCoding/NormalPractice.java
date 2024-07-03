@@ -23,6 +23,8 @@ public class NormalPractice {
 
 
 
+
+
         System.out.println(p.toString());
 
         Singeleton instanceOne = Singeleton.getInstance();

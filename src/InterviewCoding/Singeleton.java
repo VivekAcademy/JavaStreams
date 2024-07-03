@@ -6,7 +6,7 @@ public class Singeleton {
     }
 
 
-    private static class SingeletonHolder{
+    private  static class SingeletonHolder{
 
         private static final Singeleton instance = new Singeleton();
 
