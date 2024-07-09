@@ -1,5 +1,6 @@
 package EPAM_INTERNAL_ROUNDS;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -42,6 +43,13 @@ public class SelfPractice {
         reversedBasedOnElementOccurence();
         findNumericDigitsInStrings();
         findModifiedList();
+        sortedStringBasedOnSecondCharactar();
+        filterPerson();
+        numberInOddOccurence();
+        isDistinctElements();
+        concatStream();
+        removeEvenElements();
+        Syntasa_Interview_Question();
 
 
         //[1,2,3,4] = [24,12,8,6]
@@ -57,7 +65,103 @@ public class SelfPractice {
 
 
 
+/*
+        long start = 0;
+        long end = 0;
+        start = System.currentTimeMillis();
+        IntStream.rangeClosed(1,10).forEach(t->System.out.println("Thread Name " + Thread.currentThread().getName() + " ," + t));
+        end = System.currentTimeMillis();
+        System.out.println("Total Time Taken in Normal Stream " + (end-start));
 
+        start = System.currentTimeMillis();
+        IntStream.rangeClosed(1,10).parallel().forEach(t->System.out.println("Thread Name " + Thread.currentThread().getName() + " ," + t));
+        end = System.currentTimeMillis();
+        System.out.println("Total Time Taken in Parallel Stream " + (end-start));
+*/
+
+    }
+
+    private static void Syntasa_Interview_Question() {
+        String[] str = {"eat","tea","tan","ate","nat","bat"};
+        Map<String,List<String>> response = new HashMap<>();
+
+
+        for(int i = 0 ; i< str.length ; i++){
+           String value =  Arrays.stream(str[i].split(""))
+                    .sorted()
+                    .collect(Collectors.joining());
+            if(response.isEmpty() || !response.containsKey(value)){
+                List<String> listOfValues = new ArrayList<>();
+                listOfValues.add("\"" + str[i] + "\"");
+                response.put(value,listOfValues);
+            }
+
+            else{
+                response.get(value).add("\"" + str[i] + "\"");
+            }
+        }
+
+        for(Map.Entry<String,List<String>> value : response.entrySet()){
+            System.out.println(value.getValue());
+        }
+        System.out.println(response.values());
+    }
+
+    private static void removeEvenElements() {
+        List<Integer> integerList = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+        for(int i=0 ; i<integerList.size() ; i++){
+
+            if (integerList.get(i)%2==0){
+                integerList.remove(i);
+
+            }
+        }
+        System.out.println(integerList);
+    }
+
+    private static void concatStream() {
+        List<String> list1 = Arrays.asList("Java", "8");
+        List<String> list2 = Arrays.asList("explained", "through", "programs");
+
+        List<String> response =Stream.concat(list1.stream(),list2.stream())
+                .collect(Collectors.toList());
+        System.out.println(response);
+    }
+
+    private static void isDistinctElements() {
+        List<Integer> listOfIntegerTwo = Arrays.asList(1,2,3,4);
+        Set<Integer> hashSet = new HashSet<>();
+        boolean result = listOfIntegerTwo.stream()
+                .noneMatch(t->!hashSet.add(t));
+        System.out.println("Distinct Elements is " + result);
+    }
+
+    private static void numberInOddOccurence() {
+        // Number which is in ODD Occurrence
+        List<Integer> listofInteger = Arrays.asList(1,2,4,1,2,3,5);
+        Map<Integer,Long> value=listofInteger.stream()
+                .collect(Collectors.groupingBy(t->t,Collectors.counting()));
+        List<Integer> actualResponse  = value.entrySet().stream()
+                .filter(t->t.getValue()%2==1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+        System.out.println(actualResponse);
+    }
+
+    private static void filterPerson() {
+        // Age sum based on Name Contain Sachin as well address should be delhi
+        int ageSum = PersonDatabase.findPersonList()
+                .stream()
+                .filter(t -> t.getName().contains("SACHIN") || Arrays.stream(t.getAddresses()).anyMatch(address -> address.getCity().equalsIgnoreCase("Delhi"))).mapToInt(Person::getAge).sum();
+        System.out.println(ageSum);
+    }
+
+    private static void sortedStringBasedOnSecondCharactar() {
+        // Sorted based on Second Character
+        List<String> listOfStrings = Arrays.asList("Facebook", "Twitter", "YouTube", "WhatsApp", "LinkedIn");
+        listOfStrings.stream()
+                .sorted(Comparator.comparing(t->t.substring(1,2)))
+                .forEach(System.out::println);
     }
 
     private static void findModifiedList() {

@@ -1,31 +1,42 @@
 package InterviewCoding;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class NormalPractice {
 
     public static void main(String[] args){
 
-        Map<String,String> mapValue = new HashMap<>();
+        HashMap<String,String> mapValue = new HashMap<>();
         mapValue.put("Hobby","Cricket");
+        List<String> laptop = new ArrayList<>(Arrays.asList("Dell","HP"));
+        Address address = new Address(201016);
+        Set<String>queryList = new HashSet<>();
+        queryList.add("My Name is Vivek Jain");
 
 
-        Person p = new Person("Vivek", 31,mapValue);
-
-
-
-
-
-
-
-
-
-
-
+        Person p = new Person("Vivek", 31,mapValue,laptop,address,queryList);
         System.out.println(p.toString());
+        p.getQueryList().add("My Name is Aashvi Jain");
+        System.out.println(p.toString());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         Singeleton instanceOne = Singeleton.getInstance();
         Singeleton instanceTwo = Singeleton.getInstance();

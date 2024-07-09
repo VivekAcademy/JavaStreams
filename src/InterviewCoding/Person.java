@@ -1,22 +1,27 @@
 package InterviewCoding;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class Person {
 
     private final String name;
     private final int age;
 
-    private final Map<String,String> hobbies;
+    private final HashMap<String,String> hobbies;
+    private final List<String> laptop;
+    private final Set<String> queryList;
+
+    private final Address address;
 
 
-    public Person(String name,int age,Map<String,String> hobbies){
+    public Person(String name,int age,HashMap<String,String> hobbies,List<String> laptop,Address address,Set<String> queryList){
 
         this.name=name;
         this.age=age;
-        this.hobbies=Collections.unmodifiableMap(hobbies);
+        this.hobbies=hobbies;
+        this.laptop=laptop;
+        this.address=address;
+        this.queryList=queryList;
 
     }
 
@@ -30,8 +35,20 @@ public final class Person {
 
 
 
-    public Map<String,String> getHobbies(){
-        return hobbies;
+    public HashMap<String,String> getHobbies(){
+        return new HashMap<>(hobbies);
+    }
+
+    public List<String> getLaptop(){
+        return new ArrayList<>(laptop);
+    }
+
+    public Address getAddress(){
+        return new Address(address.getPinCode());
+    }
+
+    public Set<String> getQueryList() {
+        return new HashSet<>(queryList);
     }
 
     @Override
@@ -40,6 +57,9 @@ public final class Person {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", hobbies=" + hobbies +
+                ", laptop=" + laptop +
+                ", queryList=" + queryList +
+                ", address=" + address +
                 '}';
     }
 }
